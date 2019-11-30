@@ -1,30 +1,58 @@
 import React, { Component } from "react";
 import "./random-planet.css";
-import planet from "../../images/1.jpg";
+import SwapiService from "../../services/swapi-service";
 
 class RandomPlanet extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.swapiService = new SwapiService();
+        this.state = {
+            planet: {},
+        };
+        this.updatePlanet();
     }
 
+    onPlanetLoaded = (planet) => {
+        this.setState({ planet });
+    };
+
+    updatePlanet = () => {
+        const id = Math.floor(Math.random() * 25) + 1;
+        this.swapiService
+            .getPlanet(id)
+            .then(this.onPlanetLoaded);
+    };
+
     render() {
+        const {
+            planet: {
+                id,
+                name,
+                population,
+                rotationPeriod,
+                diameter,
+            },
+        } = this.state;
+
         return (
             <div className="random-planet card">
-                <img src={planet} alt="planet" />
+                <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt="planet" />
                 <div className="card-body">
                     <ul className="list-group">
                         <li className="list-group-item">
-                            <h4>Yavin IV</h4>
+                            <h4>{name}</h4>
                         </li>
                         <li className="list-group-item">
-                            Population: 123123
+                            <span className="term">Population: </span>
+                            <span>{population}</span>
                         </li>
                         <li className="list-group-item">
-                            Rotation period: 43
+                            <span className="term">Rotation period: </span>
+                            <span>{rotationPeriod}</span>
                         </li>
                         <li className="list-group-item">
-                            Diameter: 100
+                            <span className="term">Diameter: </span>
+                            <span>{diameter}</span>
                         </li>
                     </ul>
                 </div>

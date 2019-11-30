@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./app.css";
 import Header from "../header/header";
 import RandomPlanet from "../random-planet/random-planet";
+import ItemList from "../item-list/item-list";
 
 class App extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
             <div className="container">
                 <Header />
                 <RandomPlanet />
+                <ItemList />
             </div>
         );
     }
