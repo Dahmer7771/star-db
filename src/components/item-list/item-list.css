@@ -1,3 +1,10 @@
 .category-items-list {
     margin-top: 20px;
 }
+
+.category-items-list li:hover {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    color: #00bc8c;
+}
